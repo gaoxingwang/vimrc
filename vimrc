@@ -1,19 +1,13 @@
 map <F9> :call SaveInputData()<CR>
 func! SaveInputData()
-	exec "tabnew"
-	exec 'normal "+gP'
-	exec "w! /tmp/input_data"
+    exec "tabnew"
+    exec 'normal "+gP'
+    exec "w! /tmp/input_data"
 endfunc
 
 
 
 
-"colorscheme torte
-"colorscheme murphy
-"colorscheme desert 
-"colorscheme desert 
-"colorscheme elflord
-colorscheme molokai
 set t_Co=256
 set tags=tags;
 "set autochdir
@@ -34,7 +28,7 @@ set fileencoding=utf-8
 set go=             " 不要图形按钮  
 "color asmanian2     " 设置背景主题  
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
-"syntax on           " 语法高亮  
+syntax on           " 语法高亮  
 autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 "set ruler           " 显示标尺  
@@ -56,15 +50,14 @@ set statusline=%F%m%r%h%w\ %{\"[fenc=\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bom
 "set statusline+=%9*\ col:%03c\                            "光标所在列  
 "set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom
 "set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
-"set background=dark "背景使用黑色 
+set background=dark "背景使用黑色 
+colorscheme molokai
 set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
 " 显示中文帮助
 if version >= 603
-	"set helplang=cn
-	set encoding=utf-8
+    "set helplang=cn
+    set encoding=utf-8
 endif
-" 设置配色方案
-"colorscheme murphy
 "字体 
 "if (has("gui_running")) 
 "   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 
@@ -76,40 +69,40 @@ endif
 "autocmd BufNewFile *.cpp,*.[ch],*.sh,*.java exec ":call SetTitle()" 
 ""定义函数SetTitle，自动插入文件头 
 func SetTitle() 
-	"如果文件类型为.sh文件 
-	if &filetype == 'sh' 
-		call setline(1,"\#########################################################################") 
-		call append(line("."), "\# File Name: ".expand("%")) 
-		call append(line(".")+1, "\# Author: gxw") 
-		call append(line(".")+2, "\# mail: 13155350556@163.com") 
-		call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-		call append(line(".")+4, "\#########################################################################") 
-		call append(line(".")+5, "\#!/bin/bash") 
-		call append(line(".")+6, "") 
-	else 
-		call setline(1, "/*************************************************************************") 
-		call append(line("."), "	> File Name: ".expand("%")) 
-		call append(line(".")+1, "	> Author: gxw") 
-		call append(line(".")+2, "	> Mail: 13155350556@163.com ") 
-		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
-		call append(line(".")+4, " ************************************************************************/") 
-		call append(line(".")+5, "")
-	endif
-	if &filetype == 'cpp'
-		call append(line(".")+6, "#include<iostream>")
-		call append(line(".")+7, "using namespace std;")
-		call append(line(".")+8, "")
-	endif
-	if &filetype == 'c'
-		call append(line(".")+6, "#include<stdio.h>")
-		call append(line(".")+7, "")
-	endif
-	"	if &filetype == 'java'
-	"		call append(line(".")+6,"public class ".expand("%"))
-	"		call append(line(".")+7,"")
-	"	endif
-	"新建文件后，自动定位到文件末尾
-	autocmd BufNewFile * normal G
+    "如果文件类型为.sh文件 
+    if &filetype == 'sh' 
+        call setline(1,"\#########################################################################") 
+        call append(line("."), "\# File Name: ".expand("%")) 
+        call append(line(".")+1, "\# Author: gxw") 
+        call append(line(".")+2, "\# mail: 13155350556@163.com") 
+        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        call append(line(".")+4, "\#########################################################################") 
+        call append(line(".")+5, "\#!/bin/bash") 
+        call append(line(".")+6, "") 
+    else 
+        call setline(1, "/*************************************************************************") 
+        call append(line("."), "	> File Name: ".expand("%")) 
+        call append(line(".")+1, "	> Author: gxw") 
+        call append(line(".")+2, "	> Mail: 13155350556@163.com ") 
+        call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
+        call append(line(".")+4, " ************************************************************************/") 
+        call append(line(".")+5, "")
+    endif
+    if &filetype == 'cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype == 'c'
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+    endif
+    "	if &filetype == 'java'
+    "		call append(line(".")+6,"public class ".expand("%"))
+    "		call append(line(".")+7,"")
+    "	endif
+    "新建文件后，自动定位到文件末尾
+    autocmd BufNewFile * normal G
 endfunc 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
@@ -137,29 +130,29 @@ map <C-F3> \be
 "C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "! ./%<"
-	elseif &filetype == 'cpp'
-		exec "!g++ % -o %<"
-		exec "! ./%<"
-	elseif &filetype == 'java' 
-		exec "!javac %" 
-		exec "!java %<"
-	elseif &filetype == 'sh'
-		:!./%
-	elseif &filetype == 'py'
-		exec "!python %"
-		exec "!python %<"
-	endif
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'java' 
+        exec "!javac %" 
+        exec "!java %<"
+    elseif &filetype == 'sh'
+        :!./%
+    elseif &filetype == 'py'
+        exec "!python %"
+        exec "!python %<"
+    endif
 endfunc
 "C,C++的调试
 map <F8> :call Rungdb()<CR>
 func! Rungdb()
-	exec "w"
-	exec "!g++ % -g -o %<"
-	exec "!gdb ./%<"
+    exec "w"
+    exec "!g++ % -g -o %<"
+    exec "!gdb ./%<"
 endfunc
 
 
@@ -191,7 +184,7 @@ set guioptions-=m           " 隐藏菜单栏
 "set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
 " 设置在状态行显示的信息
 "set foldcolumn=0
-"set foldmethod=indent 
+set foldmethod=indent 
 "set foldlevel=3 
 "set foldenable              " 开始折叠
 " 不要使用vi的键盘模式，而是vim自己的
@@ -251,6 +244,8 @@ filetype on
 filetype plugin on
 " 为特定文件类型载入相关缩进文件
 filetype indent on
+" 将制表符扩展为空格
+set expandtab
 " 保存全局变量
 set viminfo+=!
 " 带有如下符号的单词不要被换行分割
@@ -291,11 +286,11 @@ set smartindent
 ":inoremap " ""<ESC>i
 ":inoremap ' ''<ESC>i
 function! ClosePair(char)
-	if getline('.')[col('.') - 1] == a:char
-		return "\<Right>"
-	else
-		return a:char
-	endif
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
 endfunction
 filetype plugin indent on 
 "打开文件类型检测, 加了这句才可以用智能补全
@@ -303,7 +298,7 @@ set completeopt=longest,menu
 
 " for taglist
 nmap <F4> :TlistToggle <CR> 
-let Tlist_Use_Right_Window=1
+"let Tlist_Use_Right_Window=1
 let Tlist_File_Fold_Auto_Close=1 
 
 let Tlist_Show_One_File=1     "不同时显示多个文件的tag，只显示当前文件的    
@@ -333,9 +328,9 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-
 Plugin 'molokai'
 Plugin 'bling/vim-airline'
+Plugin 'derekwyatt/vim-fswitch'
 
 Plugin 'taglist.vim'
 let Tlist_Ctags_Cmd='ctags'
@@ -352,3 +347,7 @@ map <F2> :NERDTreeToggle<CR>
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" " 启动 vim 时关闭折叠代码
+set nofoldenable
+nmap <silent> <Leader>sw :FSHere<cr>
